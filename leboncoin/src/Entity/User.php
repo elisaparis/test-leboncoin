@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -31,6 +32,7 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Exclude
      */
     private $password;
 
@@ -45,12 +47,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128, nullable=true)
      */
     private $lastname;
-
-    /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $ads;
 
     /**
      * @return int|null
@@ -132,31 +128,6 @@ class User implements UserInterface
     public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getAds(): ArrayCollection
-    {
-        return $this->ads;
-    }
-
-    /**
-     * @param ArrayCollection $ads
-     */
-    public function setAds(ArrayCollection $ads): void
-    {
-        $this->ads = $ads;
-    }
-
-    public function addAd(Ad $ad): self
-    {
-        if ($this->ads->contains($ad)) {
-            $this->ads->add($ad);
-        }
 
         return $this;
     }

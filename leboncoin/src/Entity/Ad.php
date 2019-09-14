@@ -31,13 +31,25 @@ class Ad
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="ads")
+     * @ORM\ManyToOne(targetEntity="\App\Entity\User")
      */
     private $user;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Category", inversedBy="ads", indexBy="id")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Category", indexBy="id")
      */
     private $categories;
 
@@ -46,6 +58,12 @@ class Ad
      * @ORM\OneToMany(targetEntity="App\Entity\MetaAd", mappedBy="ad", cascade={"persist", "remove"})
      */
     private $metas;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * @return int|null
@@ -110,9 +128,41 @@ class Ad
     }
 
     /**
+     * @return \DateTime|null
+     */
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
      * @return ArrayCollection
      */
-    public function getCategories(): ArrayCollection
+    public function getCategories()
     {
         return $this->categories;
     }
@@ -141,7 +191,7 @@ class Ad
     /**
      * @return ArrayCollection
      */
-    public function getMetas(): ArrayCollection
+    public function getMetas()
     {
         return $this->metas;
     }

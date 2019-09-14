@@ -31,6 +31,7 @@ class MetaAd
     /**
      * @var Ad
      * @ORM\ManyToOne(targetEntity="\App\Entity\Ad", inversedBy="metas")
+     * @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
      */
     private $ad;
 

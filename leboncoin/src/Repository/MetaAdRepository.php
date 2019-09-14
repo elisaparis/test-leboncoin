@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\MetaCategory;
+use App\Entity\MetaAd;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method MetaCategory|null find($id, $lockMode = null, $lockVersion = null)
- * @method MetaCategory|null findOneBy(array $criteria, array $orderBy = null)
- * @method MetaCategory[]    findAll()
- * @method MetaCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MetaAd|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MetaAd|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MetaAd[]    findAll()
+ * @method MetaAd[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MetaCategoryRepository extends ServiceEntityRepository
+class MetaAdRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MetaCategory::class);
+        parent::__construct($registry, MetaAd::class);
     }
 
     // /**

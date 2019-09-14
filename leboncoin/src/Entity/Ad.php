@@ -42,6 +42,12 @@ class Ad
     private $categories;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\MetaAd", mappedBy="ad", cascade={"persist", "remove"})
+     */
+    private $metas;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -130,6 +136,34 @@ class Ad
         }
 
         return $this;
+    }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getMetas(): ArrayCollection
+    {
+        return $this->metas;
+    }
+
+    /**
+     * @param ArrayCollection $metas
+     */
+    public function setMetas(ArrayCollection $metas): void
+    {
+        $this->metas = $metas;
+    }
+
+    /**
+     * @param MetaAd $meta
+     * @return Ad
+     */
+    public function addMeta(MetaAd $meta): self
+    {
+        if ($this->metas->contains($meta)) {
+            $this->metas->add($meta);
+        }
+
+        return $this;
     }
 }

@@ -104,7 +104,5 @@ class CreateUserCommand extends Command
         $this->em->flush();
 
         $io->success('User has been created successfully.');
-
     }
-
 }

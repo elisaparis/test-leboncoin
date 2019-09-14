@@ -30,12 +30,6 @@ class Category
     private $ads;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\MetaCategory", mappedBy="category", cascade={"persist", "remove"})
-     */
-    private $metas;
-
-    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -86,35 +80,6 @@ class Category
     {
         if ($this->ads->contains($ad)) {
             $this->ads->add($ad);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getMetas(): ArrayCollection
-    {
-        return $this->metas;
-    }
-
-    /**
-     * @param ArrayCollection $metas
-     */
-    public function setMetas(ArrayCollection $metas): void
-    {
-        $this->metas = $metas;
-    }
-
-    /**
-     * @param MetaCategory $meta
-     * @return Category
-     */
-    public function addMeta(MetaCategory $meta): self
-    {
-        if ($this->metas->contains($meta)) {
-            $this->metas->add($meta);
         }
 
         return $this;

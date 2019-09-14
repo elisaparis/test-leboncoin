@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\MetaCategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MetaAdRepository")
  */
-class MetaCategory
+class MetaAd
 {
     /**
      * @ORM\Id()
@@ -29,10 +29,21 @@ class MetaCategory
     private $value;
 
     /**
-     * @var Category
-     * @ORM\ManyToOne(targetEntity="\App\Entity\Category", inversedBy="metas")
+     * @var Ad
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Ad", inversedBy="metas")
      */
-    private $category;
+    private $ad;
+
+    /**
+     * MetaCategory constructor.
+     * @param $name
+     * @param $value
+     */
+    public function __construct($name, $value)
+    {
+        $this->name = $name;
+        $this->value = $value;
+    }
 
     /**
      * @return int|null
@@ -75,18 +86,18 @@ class MetaCategory
     }
 
     /**
-     * @return Category
+     * @return Ad
      */
-    public function getCategory(): Category
+    public function getCategory(): Ad
     {
-        return $this->category;
+        return $this->ad;
     }
 
     /**
-     * @param Category $category
+     * @param Ad $ad
      */
-    public function setCategory(Category $category): void
+    public function setCategory(Ad $ad): void
     {
-        $this->category = $category;
+        $this->ad = $ad;
     }
 }

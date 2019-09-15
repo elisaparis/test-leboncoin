@@ -101,4 +101,20 @@ class MetaAd
     {
         $this->ad = $ad;
     }
+
+    /**
+     * @return Ad
+     */
+    public function getAd(): Ad
+    {
+        return $this->ad;
+    }
+
+    /**
+     * @param Ad $ad
+     */
+    public function setAd(Ad $ad): void
+    {
+        $this->ad = $ad;
+    }
 }

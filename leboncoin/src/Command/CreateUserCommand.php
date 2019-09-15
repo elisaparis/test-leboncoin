@@ -54,6 +54,7 @@ class CreateUserCommand extends Command
                     'The email cannot be null.'
                 );
             }
+            // if is not email format
             else if (!preg_match('/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/', $answer)) {
                 throw new \RuntimeException(
                     'This email is not valid.'
@@ -103,6 +104,11 @@ class CreateUserCommand extends Command
         $this->em->persist($user);
         $this->em->flush();
 
-        $io->success('User has been created successfully.');
+        if ($this->em->contains($user)) {
+            $io->success('User has been created successfully.');
+        }
+        else {
+            $io->error('Oops, an error has occurred');
+        }
     }
 }

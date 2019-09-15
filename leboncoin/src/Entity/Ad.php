@@ -49,7 +49,8 @@ class Ad
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Category", indexBy="id")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Category")
+     * @ORM\JoinTable(name="ad_category")
      */
     private $categories;
 
@@ -63,6 +64,8 @@ class Ad
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->metas = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -181,7 +184,7 @@ class Ad
      */
     public function addCategory(Category $category): self
     {
-        if ($this->categories->contains($category)) {
+        if (!$this->categories->contains($category)) {
             $this->categories->add($category);
         }
 
@@ -210,7 +213,7 @@ class Ad
      */
     public function addMeta(MetaAd $meta): self
     {
-        if ($this->metas->contains($meta)) {
+        if (!$this->metas->contains($meta)) {
             $this->metas->add($meta);
         }
 

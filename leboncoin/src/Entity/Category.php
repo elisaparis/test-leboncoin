@@ -23,7 +23,6 @@ class Category
      */
     private $name;
 
-
     /**
      * @return int|null
      */

@@ -192,6 +192,19 @@ class Ad
     }
 
     /**
+     * @param Category $category
+     * @return Ad
+     */
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getMetas()
@@ -218,5 +231,26 @@ class Ad
         }
 
         return $this;
+    }
+
+    /**
+     * @param MetaAd $meta
+     * @return Ad
+     */
+    public function removeMeta(MetaAd $meta): self
+    {
+        if (!$this->metas->contains($meta)) {
+            $this->metas->removeElement($meta);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Empty metas
+     */
+    public function removeAllMetas()
+    {
+        $this->metas->clear();
     }
 }
